@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { GlobalStyle } from '../GlobalStyles';
 import { Section } from './Section/Section';
-import { FeedbackOptions } from './FeedbackBtns/FeedbackBtns';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Statistics } from './FeedbackStatistics/Statistics';
 import { Notification } from './Notification/Notification';
 
