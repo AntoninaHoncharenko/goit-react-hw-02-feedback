@@ -1,67 +1,90 @@
 import React, { Component } from 'react';
 import { GlobalStyle } from '../GlobalStyles';
-import { FeedbackBtns } from './FeedbackBtns/FeedbackBtns';
+import { Section } from './Section/Section';
+import { FeedbackOptions } from './FeedbackBtns/FeedbackBtns';
 import { Statistics } from './FeedbackStatistics/Statistics';
+import { Notification } from './Notification/Notification';
 
 export class App extends Component {
-  static defaultProps = {
-    step: 1,
-    initialValueGood: 0,
-    initialValueNeutral: 0,
-    initialValueBad: 0,
-  };
+  // static defaultProps = {
+  //   step: 1,
+  //   initialValueGood: 0,
+  //   initialValueNeutral: 0,
+  //   initialValueBad: 0,
+  // };
 
   state = {
-    goodValue: this.props.initialValueGood,
-    neutralValue: this.props.initialValueNeutral,
-    badValue: this.props.initialValueBad,
+    Good: 0,
+    Neutral: 0,
+    Bad: 0,
   };
 
-  countGood = () => {
-    this.setState((state, props) => ({
-      goodValue: state.goodValue + props.step,
+  // countGood = () => {
+  //   this.setState((state, props) => ({
+  //     goodValue: state.Good + props.step,
+  //   }));
+  // };
+
+  // countNeutral = () => {
+  //   this.setState((state, props) => ({
+  //     neutralValue: state.Neutral + props.step,
+  //   }));
+  // };
+
+  // countBad = () => {
+  //   this.setState((state, props) => ({
+  //     badValue: state.Bad + props.step,
+  //   }));
+  // };
+
+  countValue = option => {
+    this.setState(prevState => ({
+      [option]: prevState[option] + 1,
     }));
   };
 
-  countNeutral = () => {
-    this.setState((state, props) => ({
-      neutralValue: state.neutralValue + props.step,
-    }));
-  };
-
-  countBad = () => {
-    this.setState((state, props) => ({
-      badValue: state.badValue + props.step,
-    }));
-  };
+  // countTotalFeedback = () =>
+  //   this.state.Good + this.state.Neutral + this.state.Bad;
 
   countTotalFeedback = () =>
-    this.state.goodValue + this.state.neutralValue + this.state.badValue;
+    Object.values(this.state).reduce((previous, current) => previous + current);
 
   countPositiveFeedbackPercentage = () =>
     (
-      (this.state.goodValue /
-        (this.state.goodValue +
-          this.state.neutralValue +
-          this.state.badValue)) *
+      (this.state.Good /
+        Object.values(this.state).reduce(
+          (previous, current) => previous + current
+        )) *
       100
     ).toFixed(0);
 
   render() {
     return (
       <div>
-        <FeedbackBtns
-          countGood={this.countGood}
-          countNeutral={this.countNeutral}
-          countBad={this.countBad}
-        />
-        <Statistics
-          goodValue={this.state.goodValue}
-          neutralValue={this.state.neutralValue}
-          badValue={this.state.badValue}
-          totalValue={this.countTotalFeedback()}
-          positiveValue={this.countPositiveFeedbackPercentage()}
-        />
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.countValue}
+            // countGood={this.countGood}
+            // countNeutral={this.countNeutral}
+            // countBad={this.countBad}
+          />
+        </Section>
+
+        <Section title="Statistics">
+          {this.countTotalFeedback() > 0 ? (
+            <Statistics
+              good={this.state.Good}
+              neutral={this.state.Neutral}
+              bad={this.state.Bad}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          ) : (
+            <Notification message="There is no feedback" />
+          )}
+        </Section>
+
         <GlobalStyle />
       </div>
     );

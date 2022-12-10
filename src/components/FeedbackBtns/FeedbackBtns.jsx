@@ -1,10 +1,28 @@
-export const FeedbackBtns = ({ countGood, countNeutral, countBad }) => {
-  return (
-    <div>
-      <h2>Please leave feedback</h2>
-      <button onClick={countGood}>Good</button>
-      <button onClick={countNeutral}>Nautral</button>
-      <button onClick={countBad}>Bad</button>
-    </div>
-  );
+import { Component } from 'react';
+import PropTypes, { string } from 'prop-types';
+
+export class FeedbackOptions extends Component {
+  render() {
+    const { options, onLeaveFeedback } = this.props;
+    return (
+      <div>
+        {options.map(option => {
+          return (
+            <button
+              type="button"
+              key={option}
+              onClick={() => onLeaveFeedback(option)}
+            >
+              {option}
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
+}
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.arrayOf(string).isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
 };
