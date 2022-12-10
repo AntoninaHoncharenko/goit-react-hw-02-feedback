@@ -4,6 +4,7 @@ import { Section } from './Section/Section';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Statistics } from './FeedbackStatistics/Statistics';
 import { Notification } from './Notification/Notification';
+import { Container } from './Section/Section.styled';
 
 export class App extends Component {
   // static defaultProps = {
@@ -60,7 +61,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={Object.keys(this.state)}
@@ -86,7 +87,7 @@ export class App extends Component {
         </Section>
 
         <GlobalStyle />
-      </div>
+      </Container>
     );
   }
 }

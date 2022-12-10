@@ -1,23 +1,25 @@
 import { Component } from 'react';
 import PropTypes, { string } from 'prop-types';
+import { BtnWrap, Btn } from './FeedbackOptions.styled';
 
 export class FeedbackOptions extends Component {
   render() {
     const { options, onLeaveFeedback } = this.props;
     return (
-      <div>
+      <BtnWrap>
         {options.map(option => {
           return (
-            <button
+            <Btn
+              option={option}
               type="button"
               key={option}
               onClick={() => onLeaveFeedback(option)}
             >
               {option}
-            </button>
+            </Btn>
           );
         })}
-      </div>
+      </BtnWrap>
     );
   }
 }
