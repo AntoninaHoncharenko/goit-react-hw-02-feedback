@@ -4,48 +4,20 @@ import { Section } from './Section/Section';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Statistics } from './FeedbackStatistics/Statistics';
 import { Notification } from './Notification/Notification';
-import { Container } from './Section/Section.styled';
+import { Box } from './Box';
 
 export class App extends Component {
-  // static defaultProps = {
-  //   step: 1,
-  //   initialValueGood: 0,
-  //   initialValueNeutral: 0,
-  //   initialValueBad: 0,
-  // };
-
   state = {
     Good: 0,
     Neutral: 0,
     Bad: 0,
   };
 
-  // countGood = () => {
-  //   this.setState((state, props) => ({
-  //     goodValue: state.Good + props.step,
-  //   }));
-  // };
-
-  // countNeutral = () => {
-  //   this.setState((state, props) => ({
-  //     neutralValue: state.Neutral + props.step,
-  //   }));
-  // };
-
-  // countBad = () => {
-  //   this.setState((state, props) => ({
-  //     badValue: state.Bad + props.step,
-  //   }));
-  // };
-
   countValue = option => {
     this.setState(prevState => ({
       [option]: prevState[option] + 1,
     }));
   };
-
-  // countTotalFeedback = () =>
-  //   this.state.Good + this.state.Neutral + this.state.Bad;
 
   countTotalFeedback = () =>
     Object.values(this.state).reduce((previous, current) => previous + current);
@@ -61,16 +33,15 @@ export class App extends Component {
 
   render() {
     return (
-      <Container>
-        <Section title="Please leave feedback">
-          <FeedbackOptions
-            options={Object.keys(this.state)}
-            onLeaveFeedback={this.countValue}
-            // countGood={this.countGood}
-            // countNeutral={this.countNeutral}
-            // countBad={this.countBad}
-          />
-        </Section>
+      <Box m="0 auto" p="40px" width="600px">
+        <Box mb="40px">
+          <Section title="Please leave feedback">
+            <FeedbackOptions
+              options={Object.keys(this.state)}
+              onLeaveFeedback={this.countValue}
+            />
+          </Section>
+        </Box>
 
         <Section title="Statistics">
           {this.countTotalFeedback() > 0 ? (
@@ -87,7 +58,7 @@ export class App extends Component {
         </Section>
 
         <GlobalStyle />
-      </Container>
+      </Box>
     );
   }
 }

@@ -1,8 +1,14 @@
 import { Component } from 'react';
+import { nanoid } from 'nanoid';
 import PropTypes, { string } from 'prop-types';
 import { BtnWrap, Btn } from './FeedbackOptions.styled';
 
 export class FeedbackOptions extends Component {
+  static propTypes = {
+    options: PropTypes.arrayOf(string).isRequired,
+    onLeaveFeedback: PropTypes.func.isRequired,
+  };
+
   render() {
     const { options, onLeaveFeedback } = this.props;
     return (
@@ -12,7 +18,7 @@ export class FeedbackOptions extends Component {
             <Btn
               option={option}
               type="button"
-              key={option}
+              key={nanoid()}
               onClick={() => onLeaveFeedback(option)}
             >
               {option}
@@ -23,8 +29,3 @@ export class FeedbackOptions extends Component {
     );
   }
 }
-
-FeedbackOptions.propTypes = {
-  options: PropTypes.arrayOf(string).isRequired,
-  onLeaveFeedback: PropTypes.func.isRequired,
-};
