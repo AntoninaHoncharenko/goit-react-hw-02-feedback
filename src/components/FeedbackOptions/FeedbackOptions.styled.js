@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-export const BtnWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-`;
-
 export const Btn = styled.button`
   width: 100px;
   height: 40px;

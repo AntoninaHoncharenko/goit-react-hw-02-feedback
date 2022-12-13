@@ -1,5 +1,6 @@
+import { Box } from 'components/Box';
 import PropTypes from 'prop-types';
-import { StatsWrap, ValueWrap, Value, TotalValue } from './Statistics.styled';
+import { Value, TotalValue } from './Statistics.styled';
 
 export const Statistics = ({
   good,
@@ -9,16 +10,16 @@ export const Statistics = ({
   positivePercentage,
 }) => {
   return (
-    <StatsWrap>
-      <ValueWrap>
+    <div>
+      <Box display="flex" justifyContent="center" gridGap="10px" mb="15px">
         <Value value="good">Good: {good}</Value>
         <Value value="neutral">Neutral: {neutral}</Value>
         <Value value="bad">Bad: {bad}</Value>
-      </ValueWrap>
+      </Box>
 
       <TotalValue>Total: {total}</TotalValue>
       <TotalValue>Positive Feedback: {positivePercentage} %</TotalValue>
-    </StatsWrap>
+    </div>
   );
 };
 

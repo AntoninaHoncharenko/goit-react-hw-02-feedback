@@ -1,10 +1,11 @@
 import { nanoid } from 'nanoid';
 import PropTypes, { string } from 'prop-types';
-import { BtnWrap, Btn } from './FeedbackOptions.styled';
+import { Box } from 'components/Box';
+import { Btn } from './FeedbackOptions.styled';
 
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
-    <BtnWrap>
+    <Box display="flex" justifyContent="center" gridGap="10px">
       {options.map(option => {
         return (
           <Btn
@@ -17,7 +18,7 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
           </Btn>
         );
       })}
-    </BtnWrap>
+    </Box>
   );
 };
 

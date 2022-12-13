@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 
-export const StatsWrap = styled.div``;
-
-export const ValueWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 15px;
-`;
-
 export const Value = styled.p`
   width: 100px;
   height: 40px;
