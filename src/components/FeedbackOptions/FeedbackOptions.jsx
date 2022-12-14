@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import PropTypes, { string } from 'prop-types';
 import { Box } from 'components/Box';
 import { Btn } from './FeedbackOptions.styled';
@@ -11,7 +10,7 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
           <Btn
             option={option}
             type="button"
-            key={nanoid()}
+            key={option}
             onClick={() => onLeaveFeedback(option)}
           >
             {option}
